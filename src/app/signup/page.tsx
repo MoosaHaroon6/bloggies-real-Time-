@@ -24,8 +24,9 @@ export default function SignUp() {
     const saveUserToFireStore = async (
         email: string,
         password: string,
+        uid: string,
         username: string,
-        uid: string) => {
+    ) => {
         let user = { email, password, uid, username };
         let docRef = doc(db, "users", uid);
         await setDoc(docRef, user);

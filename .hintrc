@@ -15,6 +15,7 @@
       {
         "aria-command-name": "off"
       }
-    ]
+    ],
+    "button-type": "off"
   }
 }

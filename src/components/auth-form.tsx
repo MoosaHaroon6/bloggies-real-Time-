@@ -89,6 +89,9 @@ export default function AuthForm({ func, signup }: AuthFormType) {
                         className="btn btn-primary w-[200px]"
                         onClick={() => {
                             func(email, password, username);
+                            setEmail('');
+                            setPassword('');
+                            setUsername('');
                         }}
                     >{signup ? "Sign Up" : "Login"}</button>
                 </div>

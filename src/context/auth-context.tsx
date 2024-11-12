@@ -2,11 +2,13 @@
 import { auth, db } from "@/firebase/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
+import { useRouter } from "next/navigation";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 type UserType = {
     email: string;
     username: string;
+    uid: string;
 }
 
 type ContextType = {
@@ -19,14 +21,17 @@ const AuthContext = createContext<ContextType | null>(null);
 
 export default function AuthContextProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<UserType | null>(null);
+    const route = useRouter();
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 const uid = user.uid;
                 fetchUserData(uid);
+                route.push('/blogs/allBlogs')
             } else {
                 setUser(null);
+                route.push('/login')
             }
         });
     }, []);
